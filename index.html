@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Welcome to Naman Collections</title>
     
-    <!-- Include Flatpickr CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <style>
         * {
@@ -145,6 +142,20 @@
                 font-size: 16px !important;
             }
         }
+        input[type="date"] {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    padding: 12px;
+	    border: 1px solid #ddd;
+	    border-radius: 6px;
+	    width: 100%;
+	}
+
+/* For better compatibility on different browsers */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 5px;
+}
     </style>
 </head>
 <body>
@@ -181,10 +192,10 @@
                 <div class="error" id="invalidEmail"></div>
             </div>
 
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="text" class="date-picker" placeholder="Select Date..." id="dob" name="dob">
-            </div>
+      	    <div class="form-group">
+    		<label for="dob">Date of Birth</label>
+    		<input type="date" class="date-picker" id="dob" name="dob">
+	    </div>
 
             <div class="form-group">
                 <label for="address">Address</label>
@@ -196,12 +207,9 @@
     </div>
 
 <script>
-flatpickr(".date-picker", {
-    dateFormat: "d-m-Y",
-    disableMobile: false, // Set to true if you want to use Flatpickr on mobile
-    responsive: true,
-    maxDate: "today",
-});
+    // Set max date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('dob').setAttribute('max', today);
 </script>
 
 <script>
